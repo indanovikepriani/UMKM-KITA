@@ -1,8 +1,11 @@
 [phases.setup]
-nixPkgs = ["php83", "php83Extensions.pdo", "php83Extensions.pdo_mysql", "php83Extensions.mysqli", "php83Extensions.gd", "php83Extensions.mbstring", "php83Extensions.xml", "php83Extensions.curl", "php83Extensions.bcmath", "php83Extensions.exif", "php83Extensions.fileinfo", "php83Extensions.zip"]
+nixPkgs = ["php83", "php83Extensions.pdo", "php83Extensions.pdo_mysql", "php83Extensions.mysqli", "php83Extensions.gd", "php83Extensions.mbstring", "php83Extensions.xml", "php83Extensions.curl", "php83Extensions.bcmath", "php83Extensions.exif", "php83Extensions.fileinfo", "php83Extensions.zip", "nodejs_22"]
 
 [phases.build]
-cmds = ["composer install --no-dev --optimize-autoloader", "php artisan config:cache", "php artisan route:cache", "php artisan view:cache"]
+cmds = ["composer install --no-dev --optimize-autoloader", "npm ci --production=false", "npm run build", "php artisan storage:link"]
+
+[phases.deploy]
+cmds = ["php artisan config:cache", "php artisan route:cache", "php artisan view:cache"]
 
 [build]
-cacheDirectories = ["vendor"]
+cacheDirectories = ["vendor", "node_modules"]
