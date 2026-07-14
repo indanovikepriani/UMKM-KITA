@@ -1,0 +1,106 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: 'Poppins', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-serif: 'Playfair Display', ui-serif, Georgia, serif;
+    --font-inter: 'Inter', ui-sans-serif, system-ui, sans-serif;
+}
+
+/* ===== Global ===== */
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+/* ===== Public Layout (app.blade.php) ===== */
+.glass-card {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+}
+
+.glass-panel {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+}
+
+/* ===== Admin & UMKM Sidebar ===== */
+.sidebar-link { transition: all 0.2s ease; }
+.sidebar-link:hover { background-color: rgba(255,255,255,0.08); }
+.sidebar-link.active { background-color: rgba(139,90,43,0.2); color: #f5d89e; }
+.sidebar-link.active .menu-icon { color: #f5d89e; }
+.sidebar-link:hover .menu-icon { color: #f5d89e; }
+.menu-icon { color: rgba(255,255,255,0.5); transition: color 0.2s; }
+
+/* ===== Admin KPI Cards ===== */
+.kpi-card { transition: transform 0.2s, box-shadow 0.2s; }
+.kpi-card:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.08); }
+
+/* ===== Custom Scrollbar ===== */
+.custom-scroll::-webkit-scrollbar { width: 4px; }
+.custom-scroll::-webkit-scrollbar-track { background: transparent; }
+.custom-scroll::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 4px; }
+
+/* ===== Loading Button ===== */
+.btn-loading { position: relative; pointer-events: none; opacity: 0.7; }
+.btn-loading::after {
+    content: '';
+    position: absolute;
+    width: 16px; height: 16px;
+    top: 50%; left: 50%;
+    margin: -8px 0 0 -8px;
+    border: 2px solid transparent;
+    border-top-color: currentColor;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ===== Order Timeline ===== */
+.order-timeline { position: relative; padding-left: 8px; }
+.order-timeline::before {
+    content: '';
+    position: absolute;
+    left: 23px; top: 8px; bottom: 8px;
+    width: 2px;
+    background: #e5e7eb;
+}
+.timeline-item { position: relative; padding-left: 40px; padding-bottom: 28px; }
+.timeline-item:last-child { padding-bottom: 0; }
+.timeline-marker {
+    position: absolute; left: 16px; top: 4px;
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    border: 2px solid #d1d5db;
+    background: #fff;
+    z-index: 1;
+}
+.timeline-item.active .timeline-marker {
+    border-color: #8b5a2b;
+    background: #8b5a2b;
+    box-shadow: 0 0 0 4px rgba(139,90,43,0.15);
+}
+.timeline-item.completed .timeline-marker {
+    border-color: #22c55e;
+    background: #22c55e;
+}
+.timeline-content h4 { font-weight: 600; font-size: 0.875rem; }
+.timeline-content p { font-size: 0.75rem; margin-top: 2px; }
+
+/* ===== Password Toggle ===== */
+.password-toggle { position: relative; }
+.password-toggle-btn {
+    position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+    color: #9ca3af; cursor: pointer; background: none; border: none; padding: 4px;
+}
+.password-toggle-btn:hover { color: #6b7280; }
